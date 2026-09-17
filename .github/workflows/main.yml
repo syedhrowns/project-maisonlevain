@@ -1,0 +1,80 @@
+name: Deploy Maison Levain to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: |
+          if [ -d "maisonlevain" ]; then
+            cd maisonlevain && npm install
+          else
+            npm install
+          fi
+
+      - name: Build production bundle
+        run: |
+          if [ -d "maisonlevain" ]; then
+            cd maisonlevain && npm run build
+          else
+            npm run build
+          fi
+
+      - name: Prepare Pages artifacts
+        id: pages-dir
+        run: |
+          if [ -d "maisonlevain/dist" ]; then
+            TARGET_DIR="maisonlevain/dist"
+          elif [ -d "dist" ]; then
+            TARGET_DIR="dist"
+          else
+            TARGET_DIR="."
+          fi
+          
+          # Ensure 404 fallback exists for SPA routing
+          if [ ! -f "$TARGET_DIR/404.html" ] && [ -f "$TARGET_DIR/index.html" ]; then
+            cp "$TARGET_DIR/index.html" "$TARGET_DIR/404.html"
+          fi
+          
+          echo "artifact_path=$TARGET_DIR" >> $GITHUB_OUTPUT
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ steps.pages-dir.outputs.artifact_path }}
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
