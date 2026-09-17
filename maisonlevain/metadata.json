@@ -1,0 +1,6 @@
+{
+  "name": "Maison Levain - Artisanal Bakery & Online Ordering",
+  "description": "Traditional artisanal bakery featuring heritage sourdough, handcrafted pastries, custom box curation, Club Maison tier-based loyalty program, and a seamless online ordering system.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
