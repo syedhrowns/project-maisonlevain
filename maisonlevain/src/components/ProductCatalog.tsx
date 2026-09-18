@@ -3,6 +3,7 @@ import { BakeryItem, Category } from '../types';
 import { ProductCard } from './ProductCard';
 import { Sparkles, Wheat, Flame, Coffee, Cake, Utensils, Filter, Search } from 'lucide-react';
 import { motion } from 'motion/react';
+import { CustomSelect, SelectOption } from './CustomSelect';
 
 interface ProductCatalogProps {
   products: BakeryItem[];
@@ -182,17 +183,18 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
           {/* Sort Control */}
           <div className="flex items-center justify-between sm:justify-end gap-2 pt-1 sm:pt-0 shrink-0">
             <span className="text-xs text-[#786C5E] whitespace-nowrap">Sort by:</span>
-            <select
+            <CustomSelect
+              id="catalog-sort-select"
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as any)}
-              className="text-xs py-1.5 px-2.5 rounded-xl border border-[#D9CEBF] bg-white text-[#341C02] focus:outline-none shadow-xs"
-            >
-              <option value="featured">Featured / Highest Rated</option>
-              <option value="price_asc">Price: Low to High</option>
-              <option value="price_desc">Price: High to Low</option>
-              <option value="ferment">Longest Fermentation (Hours)</option>
-            </select>
-          </div>
+              onChange={(val) => setSortBy(val as any)}
+              options={[
+                { value: 'featured', label: 'Featured / Highest Rated' },
+                { value: 'price_asc', label: 'Price: Low to High' },
+                { value: 'price_desc', label: 'Price: High to Low' },
+                { value: 'ferment', label: 'Longest Fermentation (Hours)' },
+              ]}
+            />         
+         </div>
 
         </div>
 
