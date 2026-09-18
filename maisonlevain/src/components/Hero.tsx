@@ -70,7 +70,7 @@ export const Hero: React.FC<HeroProps> = ({
   return (
     <section 
       id="hero-section" 
-      className="shrink-0 relative w-full bg-transparent flex flex-col items-center justify-center min-h-[calc(100vh-64px)] min-h-[calc(100svh-64px)] min-h-[calc(100dvh-64px)] sm:min-h-0 pt-3 sm:pt-5 md:pt-6 pb-6 sm:pb-10 md:pb-12 px-4 sm:px-6 lg:px-8 max-w-full overflow-x-clip"
+      className="shrink-0 relative w-full bg-transparent flex flex-col items-center justify-center min-h-[calc(100vh-64px)] min-h-[calc(100svh-64px)] min-h-[calc(100dvh-64px)] pt-3 sm:pt-6 md:pt-8 pb-6 sm:pb-10 md:pb-12 px-4 sm:px-6 lg:px-8 max-w-full overflow-x-clip"
     >
       {/* Central Content Stack */}
       <div className="flex flex-col items-center w-full max-w-[920px] mx-auto text-center">
@@ -101,7 +101,7 @@ export const Hero: React.FC<HeroProps> = ({
         </div>
 
         {/* Center Bakery Monogram & Brand */}
-        <div className="flex flex-col items-center">
+        <div style={{ marginTop: '16px' }} className="flex flex-col items-center">
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -296,7 +296,7 @@ export const Hero: React.FC<HeroProps> = ({
 
       {/* Bakery Features Highlights Row */}
       <div className="w-full z-10 relative px-3 sm:px-4">
-        <div className="hidden sm:flex sm:flex-row sm:flex-wrap justify-center items-center w-full pt-0.5 pb-1.5 mx-auto max-w-5xl gap-2 md:gap-2.5">
+        <div style={{ marginTop: '1px' }} className="hidden sm:flex sm:flex-row sm:flex-wrap justify-center items-center w-full pt-0.5 pb-1.5 mx-auto max-w-5xl gap-2 md:gap-2.5">
           {/* The Fournil */}
           <motion.div 
             id="hero-card-fournil"
