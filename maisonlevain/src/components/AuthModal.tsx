@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { UserProfile } from '../types';
+import { CustomSelect } from './CustomSelect';
 import { 
   X, 
   User, 
@@ -506,17 +507,19 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       <Heart className="w-3.5 h-3.5 text-[#E27D60]" />
                       <span>Favorite Fournil Passion</span>
                     </label>
-                    <select
+                    <CustomSelect
                       id="signup-craft-select"
                       value={signupCraft}
-                      onChange={(e) => setSignupCraft(e.target.value)}
-                      className="w-full text-xs sm:text-sm px-3 py-2.5 rounded-xl border border-[#D9CEBF] bg-white text-[#341C02] focus:outline-none focus:ring-1 focus:ring-[#341C02]"
-                    >
-                      <option value="Heritage Sourdough">Heritage Sourdough & Ancient Grains</option>
-                      <option value="French Viennoiserie">French Viennoiserie & Butter Croissants</option>
-                      <option value="Fine Pâtisserie">Fine Pâtisserie & Seasonal Tarts</option>
-                      <option value="Savory Provisions">Savory Bakes & Churned Butter</option>
-                    </select>
+                      onChange={(val) => setSignupCraft(val)}
+                      options={[
+                        { value: 'Heritage Sourdough', label: 'Heritage Sourdough & Ancient Grains' },
+                        { value: 'French Viennoiserie', label: 'French Viennoiserie & Butter Croissants' },
+                        { value: 'Fine Pâtisserie', label: 'Fine Pâtisserie & Seasonal Tarts' },
+                        { value: 'Savory Provisions', label: 'Savory Bakes & Churned Butter' },
+                      ]}
+                      className="w-full"
+                      buttonClassName="w-full py-2.5 px-3"
+                    />
                   </div>
 
                   <button
